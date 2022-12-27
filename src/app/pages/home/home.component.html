@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2># CRUD - Rota de Viagem #</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a (click)="addRoutes(modalData)" class="btn btn-success"><i class="material-icons">&#xE147;</i>
+                        <span>Nova
+                            rota</span></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Origem</th>
+                    <th>Destino</th>
+                    <th>Paradas</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let routes of routesList">
+                    <td class="col-sm-4">{{routes.origin}}</td>
+                    <td class="col-sm-4">{{routes.destination}}</td>
+                    <td class="col-sm-2">{{routes.description}}</td>
+                    <td class="col-sm-2">{{routes.price}}</td>
+                    <td class="col-sm-2">
+                        <a (click)="editRoutes(modalData, routes.id)" class="edit" data-toggle="modal"><i
+                                class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a (click)="deleteRoutes(routes.id)" class="delete"><i class="material-icons" data-toggle="tooltip"
+                                title="Delete">&#xE872;</i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{formLabel}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Origem:</label>
+                <input type="text" [(ngModel)]="routes.origin" value="{{routes.origin}}" class="form-control" required>
+
+            </div>
+            <div class="form-group">
+                <label>Destino:</label>
+                <input type="text" value="{{routes.destination}}" [(ngModel)]="routes.destination" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Paradas:</label>
+                <input type="text" value="{{routes.description}}" [(ngModel)]="routes.description" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Núm. Paradas:</label>
+                <input type="text" value="{{routes.numberOfStops}}" [(ngModel)]="routes.numberOfStops" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Valor:</label>
+                <input type="text" value="{{routes.price}}" [(ngModel)]="routes.price" class="form-control" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="button" (click)="modal.close('Save click')" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
+            <input type="submit" (click)="sendForm()" class="btn btn-success" value="{{btnLabel}}">
+        </div>
+
+    </div>
+</ng-template>
